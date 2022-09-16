@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Map</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div id="logo">Client<strong>Map</strong></div>
+        <section>Account</section>
+        <section>Settings</section>
+        <section>Help</section>
+        <section id="file-button">Client File</section>
+    </header>
+    
+    
+    <!-- <a href="spreadsheets/master-client-spreadsheet.xlsx" download>Download Template Spreadseet</a> -->
+    
+    
+    <main>
+        <div id="side-panel"></div>
+        <div id="map" disabled></div>
+    </main>
+    
+    
+    <script src="script.js" type="module"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD47y2tUPyA7Dvhsf7-_1cBpPcxwsXpBNg&callback=initMap" defer></script>
+</body>
+</html>
