@@ -3,7 +3,7 @@ import { read, /* writeFileXLSX, utils */ } from "https://cdn.sheetjs.com/xlsx-0
 
 const mapElement = document.getElementById("map");
 
-let clients;   // object containing all clients, with their name in lowercase as the key
+let clients = {};   // object containing all clients, with their name in lowercase as the key
 let map;   // google map object
 let distanceMatrixService;  // object for calculating travel time/distance between waypoints
 
@@ -166,14 +166,14 @@ function initMap() {
     // add map overlay element to map element
     const mapFileOverlay = document.createElement("div");
     mapFileOverlay.id = "map-file-overlay";
-    mapFileOverlay.classList.add("visible");
+    mapFileOverlay.setAttribute("visible", "true");
 
     const filePlaceBox = document.createElement("div");
     filePlaceBox.id = "file-place-box";
     filePlaceBox.innerHTML = `
         <img src='images/download.png' alt='file upload icon'>
         <div> 
-            <p>Drag Excel File onto Map <i>or</i> Click Here</p>
+            <p class='message'>Drag Excel File onto Map <i>or</i> Click Here</p>
             <p class='info'>.xlsx files supported</p>
         </div>
     `;
@@ -185,14 +185,38 @@ function initMap() {
     filePlaceBox.addEventListener("click", event => {
         fileInputElement.click();
     });
+
+    filePlaceBox.addEventListener("mouseenter", event => {
+        filePlaceBox.querySelector(".message").innerHTML = "Drag Excel File onto Map <i>or</i> <strong style='color: white'>Click Here<strong>"
+    });
+
+    filePlaceBox.addEventListener("mouseleave", event => {
+        filePlaceBox.querySelector(".message").innerHTML = "Drag Excel File onto Map <i>or</i> Click Here"
+    });
     mapFileOverlay.appendChild(filePlaceBox);
 
     mapElement.appendChild(mapFileOverlay);
 
-    mapElement.ondragover = fileDragOverHandler;
-    mapElement.ondrop = fileDropHandler;
+
+    mapElement.addEventListener("dragenter", event => {       
+        mapElement.setAttribute("fileover", "true");
+        filePlaceBox.querySelector(".message").innerHTML = "<strong style='color: white'>Drop Excel File onto Map</strong> <i>or</i> Click Here";
+
+        mapFileOverlay.setAttribute("visible", "true");
+    });
+    
+    mapFileOverlay.addEventListener("dragleave", event => {
+        mapElement.setAttribute("fileover", "false");
+        filePlaceBox.querySelector(".message").innerHTML = "Drag Excel File onto Map <i>or</i> Click Here";
+
+        if (Object.keys(clients).length > 0) mapFileOverlay.setAttribute("visible", "false");
+    });
+
+    mapFileOverlay.addEventListener("drop", event => {
+        mapElement.setAttribute("fileover", "false");
+        filePlaceBox.querySelector(".message").innerHTML = "Drag Excel File onto Map <i>or</i> Click Here";
+    });
 }
-window.initMap = initMap;
 
 
 
@@ -215,10 +239,14 @@ function fileInputHandler(file) {
 
     if (file.type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
         infoText.innerHTML = "<strong>Success!</strong> Loading waypoints...";
-        infoText.style.setProperty("color", "rgb(0, 110, 0)");
+        infoText.classList.add("success");
+        mapFileOverlay.style.pointerEvents = "none";
 
         setTimeout(() => {
-            mapFileOverlay.classList.remove("visible");
+            mapFileOverlay.setAttribute("visible", "false");
+            infoText.innerHTML = ".xlsx files supported"
+            infoText.classList.remove("success");
+            mapFileOverlay.style.pointerEvents = "auto";
             parseSpreadsheet(file);
         }, 1000);
     } else {
@@ -226,3 +254,14 @@ function fileInputHandler(file) {
         infoText.style.setProperty("color", "darkred");
     }
 }
+
+
+
+window.initMap = initMap;
+mapElement.ondragover = fileDragOverHandler;
+mapElement.ondrop = fileDropHandler;
+
+document.getElementById("file-button").addEventListener("click", event => {
+    const mapFileOverlay = document.getElementById("map-file-overlay");
+    mapFileOverlay.setAttribute("visible", (mapFileOverlay.getAttribute("visible") == "true") ? "false" : "true");
+});

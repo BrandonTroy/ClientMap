@@ -70,6 +70,19 @@ main {
     background: #8ab4f8;
 }
 
+/* #map[fileover="true"] {
+    border: 10px solid red;
+}
+
+#map[fileover="false"] {
+    border: none;
+} */
+
+#map[fileover="true"] #file-place-box {
+    pointer-events: none;
+}
+
+
 /* disables blue focus border that initially appears around map */
 .gm-style iframe + div { border:none!important; }
 
@@ -91,12 +104,16 @@ main {
     transition: opacity 2s;
 }
 
-#map-file-overlay.visible {
+#map-file-overlay[visible="true"] {
     display: flex;
     opacity: 1;
 }
 
-#map-file-overlay #file-place-box {
+/* #map[fileover="true"] #map-file-overlay {
+    pointer-events: none;
+} */
+
+#file-place-box {
     display: flex;
     align-items: center;
 
@@ -115,24 +132,42 @@ main {
     transition: transform 0.1s;
 }
 
-#map-file-overlay #file-place-box:hover {
-    /* background-color: rgba(128, 128, 128, 70%); */
+
+@keyframes test {
+    0% { transform: scale(110%) rotate(0) }
+    25% { transform: scale(110%) rotate(2deg) }
+    50% { transform: scale(110%) rotate(0) }
+    75% { transform: scale(110%) rotate(-2deg)}
+    100% { transform: scale(110%) rotate(0) }
+}
+
+
+#file-place-box:hover {
     transform: scale(110%);
 }
 
-#map-file-overlay #file-place-box img {
+#map[fileover="true"] #file-place-box {
+    animation: test 0.35s infinite;
+}
+
+
+#file-place-box img {
     height: 4em;
     margin-right: 1.5em;
 }
 
-#map-file-overlay #file-place-box p:nth-child(1) {
+#file-place-box p:nth-child(1) {
     margin-top: 1rem;
 }
 
-#map-file-overlay #file-place-box .info {
+#file-place-box .info {
     color: rgb(59, 59, 59);
     font-size: 0.85rem;
     height: 1.5em;
+}
+
+#file-place-box .info.success {
+    color: rgb(0, 110, 0);
 }
 
 
