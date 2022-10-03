@@ -263,5 +263,14 @@ mapElement.ondrop = fileDropHandler;
 
 document.getElementById("file-button").addEventListener("click", event => {
     const mapFileOverlay = document.getElementById("map-file-overlay");
-    mapFileOverlay.setAttribute("visible", (mapFileOverlay.getAttribute("visible") == "true") ? "false" : "true");
+    mapFileOverlay.setAttribute("visible", (mapFileOverlay.getAttribute("visible") == "true") ? (Object.keys(clients).length > 0) ? "false" : "true" : "true");
 });
+
+document.querySelector("#side-panel-container .handle").addEventListener("click", event => {
+    const sidePanel = document.getElementById("side-panel");
+    if (sidePanel.classList.contains('hidden')) sidePanel.classList.remove('hidden');
+    else sidePanel.classList.add('hidden');
+});
+
+document.addEventListener("dragover", event => event.preventDefault());
+document.addEventListener("drop", event => event.preventDefault());

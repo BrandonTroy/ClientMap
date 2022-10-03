@@ -10,10 +10,9 @@
 <body>
     <header>
         <div id="logo">Client<strong>Map</strong></div>
-        <section>Account</section>
-        <section>Settings</section>
         <section>Help</section>
-        <section id="file-button">Client File</section>
+        <section>Settings</section>
+        <section id="file-button">Client File: <em style="color: darkgrey">None</em></section>
     </header>
     
     
@@ -21,12 +20,136 @@
     
     
     <main>
-        <div id="side-panel"></div>
+        <div id="side-panel-container">
+            <div id="side-panel">
+
+                <!-- <p class="info">No client file selected</p> -->
+
+                <div class="client">
+                    <h4>Brandon Troy</h4>
+
+                    <div class="details">
+                        <input type="checkbox" name="visited" id="visited">
+                        <label for="visited">Visited this cycle</label>
+                    </div>
+                </div>
+
+                
+
+                <div class="client">
+                    <h4>John Cena</h4>
+                </div>
+
+                <div class="client">
+                    <h4>Juancarlos Martinez III</h4>
+                </div>
+
+                <div class="client">
+                    <h4>Dylan Thomas Troy</h4>
+                </div>
+
+                <div class="client">
+                    <h4>Wendell Smithfield Sr.</h4>
+                </div>
+
+                <div class="client">
+                    <h4>Barry James Troy I</h4>
+                </div>
+
+                <div class="client">
+                    <h4>Brandon Troy</h4>
+                </div>
+
+                <div class="client">
+                    <h4>John Cena</h4>
+                </div>
+
+                <div class="client">
+                    <h4>Juancarlos Martinez III</h4>
+                </div>
+
+                <div class="client">
+                    <h4>Dylan Thomas Troy</h4>
+                </div>
+
+                <div class="client">
+                    <h4>Wendell Smithfield Sr.</h4>
+                </div>
+
+                <div class="client">
+                    <h4>Barry James Troy I</h4>
+                </div>
+
+                <div class="client">
+                    <h4>Brandon Troy</h4>
+                </div>
+
+                <div class="client">
+                    <h4>John Cena</h4>
+                </div>
+
+                <div class="client">
+                    <h4>Juancarlos Martinez III</h4>
+                </div>
+
+                <div class="client">
+                    <h4>Dylan Thomas Troy</h4>
+                </div>
+
+                <div class="client">
+                    <h4>Wendell Smithfield Sr.</h4>
+                </div>
+
+                <div class="client">
+                    <h4>Barry James Troy I</h4>
+                </div>
+
+                <div class="client">
+                    <h4>Brandon Troy</h4>
+                </div>
+
+                <div class="client">
+                    <h4>John Cena</h4>
+                </div>
+
+                <div class="client">
+                    <h4>Juancarlos Martinez III</h4>
+                </div>
+
+                <div class="client">
+                    <h4>Dylan Thomas Troy</h4>
+                </div>
+
+                <div class="client">
+                    <h4>Wendell Smithfield Sr.</h4>
+                </div>
+
+                <div class="client">
+                    <h4>Barry James Troy I</h4>
+                </div>
+
+                
+
+            </div>
+
+            <div class="handle">
+                <ion-icon name="chevron-forward" class="right"></ion-icon>
+                <ion-icon name="chevron-forward" class="right"></ion-icon>
+                <ion-icon name="chevron-forward" class="right"></ion-icon>
+                <ion-icon name="chevron-back" class="left"></ion-icon>
+                <ion-icon name="chevron-back" class="left"></ion-icon>
+                <ion-icon name="chevron-back" class="left"></ion-icon>
+            </div>
+            
+        </div>
+
         <div id="map" fileover="false" disabled></div>
     </main>
     
     
     <script src="script.js" type="module"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD47y2tUPyA7Dvhsf7-_1cBpPcxwsXpBNg&callback=initMap" defer></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
